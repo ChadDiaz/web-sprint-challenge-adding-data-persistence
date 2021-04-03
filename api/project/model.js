@@ -1,11 +1,14 @@
 const db = require("../../data/dbConfig.js");
+const mappers = require("./mappers.js");
 
-function getProject() {
-  return db("projects");
+async function getProject() {
+  let query = await db("projects as p");
+  return query;
 }
 
 async function getProjectById(project_id) {
-  return await db("projects").first("*").where({ project_id });
+  const newProject = await db("projects").first("*").where({ project_id });
+  return newProject;
 }
 
 async function addProject(body) {
