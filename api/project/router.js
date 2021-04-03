@@ -3,7 +3,7 @@ const Project = require("./model.js");
 
 router.get("/", async (req, res, next) => {
   try {
-    const data = await Project.getResource();
+    const data = await Project.getProject();
     res.status(200).json(data);
   } catch (err) {
     next(err);
@@ -17,7 +17,7 @@ router.post("/", async (req, res, next) => {
     if (!newPost.project_name) {
       const err = new Error();
       err.status = 400;
-      err.message = "resource must contain a resource_name";
+      err.message = "project must contain a project_name";
       next(err);
     } else {
       res.status(201).json(newPost);
