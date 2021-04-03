@@ -11,19 +11,20 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
-  const post = req.body;
-  try {
-    const newPost = await Project.addProject(post);
-    if (!newPost.project_name) {
-      const err = new Error();
-      err.status = 400;
-      err.message = "project must contain a project_name";
-      next(err);
-    } else {
-      res.status(201).json(newPost);
-    }
-  } catch (err) {
+  const project = req.body;
+
+  if (!project.project_name || !project.project_completed) {
+    const err = new Error();
+    err.status = 400;
+    err.message = `project must contain name and if completed`;
     next(err);
+  } else {
+    try {
+      const newProject = await Project.addProject(project);
+      res.status(200).json(newProject);
+    } catch (err) {
+      next(err);
+    }
   }
 });
 
