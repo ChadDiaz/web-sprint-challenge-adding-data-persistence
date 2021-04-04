@@ -13,10 +13,11 @@ router.get("/", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   const task = req.body;
 
-  if (!task.task_description || !task.task_completed) {
+  if (!task.task_description || !task.project_id) {
+    console.log(1);
     const err = new Error();
     err.status = 400;
-    err.message = `task must contain name and if completed`;
+    err.message = `task must contain task description and project number`;
     next(err);
   } else {
     try {
