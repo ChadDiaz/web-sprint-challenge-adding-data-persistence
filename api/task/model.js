@@ -11,7 +11,7 @@ async function getTask() {
       "projects.project_description"
     )
     .from("tasks")
-    .join("projects", "tasks.project_id", "=", "projects.project_id");
+    .join("projects", "tasks.project_id", "projects.project_id");
 
   return tasks.map((task) => {
     return {

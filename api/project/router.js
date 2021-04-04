@@ -17,7 +17,7 @@ router.post("/", async (req, res, next) => {
     console.log(1);
     const err = new Error();
     err.status = 400;
-    err.message = `project must contain name and if completed`;
+    err.message = `project must contain project_name`;
     next(err);
   } else {
     try {
