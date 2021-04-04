@@ -1,12 +1,23 @@
 const db = require("../../data/dbConfig.js");
-const mappers = require("./mappers.js");
 
-function getProject() {
-  return db("projects");
+async function getProject() {
+  const projects = await db("projects");
+  return projects.map((project) => {
+    return {
+      ...project,
+      project_completed: project.project_completed === 0 ? false : true,
+    };
+  });
 }
 
 async function getProjectById(project_id) {
-  return await db("projects").first("*").where({ project_id });
+  const project = await db("projects").first("*").where({ project_id });
+  return projects.map((project) => {
+    return {
+      ...project,
+      project_completed: project.project_completed === 0 ? false : true,
+    };
+  });
 }
 
 async function addProject(body) {
