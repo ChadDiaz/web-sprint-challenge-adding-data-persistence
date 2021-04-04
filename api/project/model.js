@@ -10,14 +10,12 @@ async function getProject() {
   });
 }
 
-async function getProjectById(project_id) {
-  const project = await db("projects").first("*").where({ project_id });
-  return projects.map((project) => {
-    return {
-      ...project,
-      project_completed: project.project_completed === 0 ? false : true,
-    };
-  });
+async function getProjectById(id) {
+  const [project] = await db("projects").where({ project_id: id });
+  return {
+    ...project,
+    project_completed: project.project_completed == 0 ? false : true,
+  };
 }
 
 async function addProject(body) {

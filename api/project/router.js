@@ -13,7 +13,7 @@ router.get("/", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   const project = req.body;
 
-  if (!project.project_name || !project.project_completed) {
+  if (!project.project_name || !project.project_completed ) {
     const err = new Error();
     err.status = 400;
     err.message = `project must contain name and if completed`;
